@@ -1,0 +1,327 @@
+/**
+ * Openai scripts
+ * @since 2.4.23
+ * */
+
+jQuery(document).ready(function($){
+	
+	let wpmpProBtn = '<span class="wpm-upgrade-to-pro-note" style="font-weight: 500;"> This Feature requires the <a href="https://wp-multilang.com/pricing/#pricings" target="__blank">Premium Version</span>';
+	let wpmOpenAINote = '<span class="wpm-upgrade-to-pro-note" style="font-weight: 500;"> Please configure OpenAI settings</span>';
+	let wpmLicenseKeyError = '<span class="wpm-upgrade-to-pro-note" style="font-weight: 500;"> Your license key is inactive or expired</span>';
+
+	// Validate openai key
+	$(document).on('click', '#wpm-validate-openai-key', function(e) {
+		e.preventDefault();
+		const rawSecretKey = $('#wpm-openai-secretkey').val();
+		const secretKey = rawSecretKey.trim();
+		if ( secretKey.length === 0 ) {
+			$('#wpm-secret-key-error').show();
+			return;
+		}
+		let provider = 'openai';
+
+		$('#wpm-secret-key-error').hide();
+		$('#wpm-prompt-error').hide();
+		$('.wpm-openai-api-success-note').hide();
+		$('.wpm-openai-api-error-note').hide();
+		$('.wpm-openai-provider-note').hide();
+		$(this).addClass('updating-message');
+		$.ajax({
+			url: ajaxurl,
+			type: 'POST',
+			data: {action: 'wpm_validate_secret_key', provider: provider, secret_key: secretKey, security: wpm_openai_params.wpmpro_openai_nonce},
+			success: function(response) {
+				$('#wpm-validate-openai-key').removeClass('updating-message');
+				if ( response.success ) {
+					const models 	=	response.data.models;
+
+					let optionsHtml = '';
+					$.each(models, function(index, value) {
+						optionsHtml += `<option value="${value}">${value}</option>`;
+					});
+					$('#wpm-hide-openai-models-wrapper').show();
+					$('#wpm-openai-models').html(optionsHtml);
+					$('.wpm-openai-api-success-note').show();
+					$('.wpm-openai-api-success-note').text( response.data.message );
+				} else {
+					if ( response.data && response.data.message ) {
+						$('.wpm-openai-api-error-note').show();
+						$('.wpm-openai-api-error-note').text( response.data.message );
+					}	
+				}
+			}
+		});
+	}); 
+
+	// Validate gemini key
+	$(document).on('click', '#wpm-validate-gemini-key', function(e) {
+		e.preventDefault();
+		const rawSecretKey = $('#wpm-gemini-secretkey').val();
+		const secretKey = rawSecretKey ? rawSecretKey.trim() : '';
+		if ( secretKey.length === 0 ) {
+			$('#wpm-gemini-secret-key-error').show();
+			return;
+		}
+		const provider = 'gemini';
+
+		$('#wpm-gemini-secret-key-error').hide();
+		$('#wpm-gemini-prompt-error').hide();
+		$('.wpm-gemini-api-success-note').hide();
+		$('.wpm-gemini-api-error-note').hide();
+		$(this).addClass('updating-message');
+		$.ajax({
+			url: ajaxurl,
+			type: 'POST',
+			data: {action: 'wpm_validate_secret_key', provider: provider, secret_key: secretKey, security: wpm_openai_params.wpmpro_openai_nonce},
+			success: function(response) {
+				$('#wpm-validate-gemini-key').removeClass('updating-message');
+				if ( response.success ) {
+					const models 	=	response.data.models;
+
+					let optionsHtml = '';
+					$.each(models, function(index, value) {
+						optionsHtml += `<option value="${value}">${value}</option>`;
+					});
+					$('#wpm-hide-gemini-models-wrapper').show();
+					$('#wpm-gemini-models').html(optionsHtml);
+					$('.wpm-gemini-api-success-note').show();
+					$('.wpm-gemini-api-success-note').text( response.data.message );
+				} else {
+					if ( response.data && response.data.message ) {
+						$('.wpm-gemini-api-error-note').show();
+						$('.wpm-gemini-api-error-note').text( response.data.message );
+					}	
+				}
+			},
+			error: function() {
+				$('#wpm-validate-gemini-key').removeClass('updating-message');
+				$('.wpm-gemini-api-error-note').show().text('Validation failed. Please try again.');
+			}
+		});
+	}); 
+
+	// Validate deepseek key
+	$(document).on('click', '#wpm-validate-deepseek-key', function(e) {
+		e.preventDefault();
+		const rawSecretKey = $('#wpm-deepseek-secretkey').val();
+		const secretKey = rawSecretKey ? rawSecretKey.trim() : '';
+		if ( secretKey.length === 0 ) {
+			$('#wpm-deepseek-secret-key-error').show();
+			return;
+		}
+		const provider = 'deepseek';
+
+		$('#wpm-deepseek-secret-key-error').hide();
+		$('#wpm-deepseek-prompt-error').hide();
+		$('.wpm-deepseek-api-success-note').hide();
+		$('.wpm-deepseek-api-error-note').hide();
+		$(this).addClass('updating-message');
+		$.ajax({
+			url: ajaxurl,
+			type: 'POST',
+			data: {action: 'wpm_validate_secret_key', provider: provider, secret_key: secretKey, security: wpm_openai_params.wpmpro_openai_nonce},
+			success: function(response) {
+				$('#wpm-validate-deepseek-key').removeClass('updating-message');
+				if ( response.success ) {
+					const models 	=	response.data.models;
+
+					let optionsHtml = '';
+					$.each(models, function(index, value) {
+						optionsHtml += `<option value="${value}">${value}</option>`;
+					});
+					$('#wpm-hide-deepseek-models-wrapper').show();
+					$('#wpm-deepseek-models').html(optionsHtml);
+					$('.wpm-deepseek-api-success-note').show();
+					$('.wpm-deepseek-api-success-note').text( response.data.message );
+				} else {
+					if ( response.data && response.data.message ) {
+						$('.wpm-deepseek-api-error-note').show();
+						$('.wpm-deepseek-api-error-note').text( response.data.message );
+					}	
+				}
+			},
+			error: function() {
+				$('#wpm-validate-deepseek-key').removeClass('updating-message');
+				$('.wpm-deepseek-api-error-note').show().text('Validation failed. Please try again.');
+			}
+		});
+	}); 
+
+	$(document).on('click', '#wpm-save-openai-settings', function(e) {
+		e.preventDefault();
+
+		$('#wpm-secret-key-error').hide();
+		$('#wpm-prompt-error').hide();
+		$('#wpm-gemini-secret-key-error').hide();
+		$('#wpm-gemini-prompt-error').hide();
+		$('#wpm-deepseek-secret-key-error').hide();
+		$('#wpm-deepseek-prompt-error').hide();
+		let provider = $('#wpm-ai-provider').val();
+		let providerExists 	=	false;
+		const aiApiProviders = wpm_openai_params.ai_api_providers;
+
+		if (provider in aiApiProviders) {
+			providerExists 	=	true;
+		}
+
+		let model = '';
+		let prompt = '';
+		if ( provider === 'gemini' ) {
+			if ( $('#wpm-gemini-models').length > 0 ) {
+				model = $('#wpm-gemini-models').val();
+				if ( model ) {
+					model = model.trim();
+				}
+			}
+			prompt = $('#wpm-gemini-prompt').val() || '';
+		} else if ( provider === 'deepseek' ) {
+			if ( $('#wpm-deepseek-models').length > 0 ) {
+				model = $('#wpm-deepseek-models').val();
+				if ( model ) {
+					model = model.trim();
+				}
+			}
+			prompt = $('#wpm-deepseek-prompt').val() || '';
+		} else {
+			if ( $('#wpm-openai-models').length > 0 ) {
+				model = $('#wpm-openai-models').val();
+				if ( model ) {
+					model = model.trim(); 
+				}
+			}
+			prompt = $('#wpm-openai-prompt').val() || '';
+		}
+
+		let enabled = '0';
+		if ( $('#wpm_openai_integration').is(':checked') ) {
+			enabled = '1';
+		}
+
+		let deeplEnabled = '0';
+		if ( $('#wpm_deepl_integration').is(':checked') ) {
+			deeplEnabled = '1';
+		}
+
+		let deeplSecretKey = $('#wpm-deepl-secretkey').val();
+		let deeplApiPlan = $('#wpm-deepl-api-plan').val();
+
+		let geminiEnabled = '0';
+		if ( $('#wpm_gemini_integration').is(':checked') ) {
+			geminiEnabled = '1';
+		}
+		let geminiSecretKey = $('#wpm-gemini-secretkey').val() || '';
+		let geminiModel = $('#wpm-gemini-models').val() || '';
+		let geminiPrompt = $('#wpm-gemini-prompt').val() || '';
+
+		let deepseekEnabled = '0';
+		if ( $('#wpm_deepseek_integration').is(':checked') ) {
+			deepseekEnabled = '1';
+		}
+		let deepseekSecretKey = $('#wpm-deepseek-secretkey').val() || '';
+		let deepseekModel = $('#wpm-deepseek-models').val() || '';
+		let deepseekPrompt = $('#wpm-deepseek-prompt').val() || '';
+
+		let $button = $('#wpm-save-openai-settings');
+
+		if ( providerExists ) {
+
+			$($button).prop('disabled', true).text('Saving Changes...');
+
+			$.ajax({
+				url: ajaxurl,
+				type: 'POST',
+				data: {
+					action: 'wpm_save_openai_settings', 
+					provider: provider, 
+					model: model, 
+					prompt: prompt, 
+					wpm_openai_integration: enabled, 
+					wpm_deepl_integration: deeplEnabled,
+					wpm_deepl_secret_key: deeplSecretKey,
+					wpm_deepl_api_plan: deeplApiPlan,
+					wpm_gemini_integration: geminiEnabled,
+					wpm_gemini_secret_key: geminiSecretKey,
+					wpm_gemini_model: geminiModel,
+					wpm_gemini_prompt: geminiPrompt,
+					wpm_deepseek_integration: deepseekEnabled,
+					wpm_deepseek_secret_key: deepseekSecretKey,
+					wpm_deepseek_model: deepseekModel,
+					wpm_deepseek_prompt: deepseekPrompt,
+					security: wpm_openai_params.wpmpro_openai_nonce},
+				success: function(response) {
+					if (!response.success) {
+						if ( provider === 'gemini' ) {
+							$('#wpm-gemini-prompt-error')
+								.text(response.data.message)
+								.show();
+						} else if ( provider === 'deepseek' ) {
+							$('#wpm-deepseek-prompt-error')
+								.text(response.data.message)
+								.show();
+						} else {
+							$('#wpm-prompt-error')
+								.text(response.data.message)
+								.show();
+						}
+
+	                    $button.prop('disabled', false).text('Save Changes');
+	                    return;
+	                }
+					window.location.reload(true);
+				},
+				error: function() {
+	                alert('Something went wrong. Please try again.');
+	                $button.prop('disabled', false).text('Save Changes');
+	            }
+			});
+
+
+		}else{
+			alert('Please select provider');
+			return;
+		}
+	})
+
+	$(document).on('click', '#wpm_openai_integration', function(e) {
+		if($(this).is(':checked')) {
+			const provider = 'openai';
+			$('.wpm-openai-children').show();
+			if( wpm_openai_params.ai_settings.model.length === 0) {
+				$('#wpm-hide-openai-models-wrapper').hide();
+			}
+		}else{
+			$('.wpm-openai-children').hide();
+		}
+	});
+
+	$(document).on('click', '#wpm_deepl_integration', function(e) {
+		if($(this).is(':checked')) {
+			$('.wpm-deepl-children').show();
+		}else{
+			$('.wpm-deepl-children').hide();
+		}
+	});
+
+	$(document).on('click', '#wpm_gemini_integration', function(e) {
+		if($(this).is(':checked')) {
+			$('.wpm-gemini-children').show();
+			if( $('#wpm-gemini-models option').length === 0 ) {
+				$('#wpm-hide-gemini-models-wrapper').hide();
+			}
+		}else{
+			$('.wpm-gemini-children').hide();
+		}
+	});
+
+	$(document).on('click', '#wpm_deepseek_integration', function(e) {
+		if($(this).is(':checked')) {
+			$('.wpm-deepseek-children').show();
+			if( $('#wpm-deepseek-models option').length === 0 ) {
+				$('#wpm-hide-deepseek-models-wrapper').hide();
+			}
+		}else{
+			$('.wpm-deepseek-children').hide();
+		}
+	});
+
+});

@@ -1,0 +1,20 @@
+a.brand {
+  width: 100px;
+}
+
+.success-message-box {
+    border-radius: 17px;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px;
+    background: #fff;
+    box-shadow: var(--shadow);
+    color: green;
+    font-weight: 600;
+}
+.not_found-404 {
+    text-align: center;
+    margin: 150px;
+}

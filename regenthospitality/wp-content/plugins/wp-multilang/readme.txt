@@ -1,0 +1,372 @@
+=== WP Multilang - Translation and Multilingual Plugin ===
+
+Contributors: magazine3
+Donate link: https://paypal.me/kaludi
+Tags: localization, multilanguage, multilingual, translation, translate
+Requires at least: 4.7
+Tested up to: 7.1
+Stable tag: 2.4.35
+Requires PHP: 5.6.20
+License: GPL2
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+Multilingual plugin for WordPress. Go Multilingual in minutes with full WordPress support. Translate your site easily with this localization plugin.
+
+== Description ==
+
+WP Multilang is a multilingual plugin for WordPress.
+
+Translations of post types, taxonomies, meta fields, options, text fields in miltimedia files, menus, titles and text fields in widgets.
+
+[Home](https://wp-multilang.com/) | [Help & Tech Support](https://wp-multilang.com/contact-us/) | [Documentation](https://wp-multilang.com/docs/) | [Premium Features](https://wp-multilang.com/#features)
+
+== New Features of the plugin WP Multilang ==
+* Support full site editor for block based themes
+* Support block based widgets
+* Support different feature image for each language
+* Support Smart Custom Fields Plugin
+* Auto Translation ( [available in premium version](https://wp-multilang.com/pricing/) ) - [View Tutorial](https://wp-multilang.com/docs/knowledge-base/how-to-auto-translate-your-website-contents-using-wp-multilang/)
+* Support URL Slug Translation ( [available in premium version](https://wp-multilang.com/pricing/) ) - [View Tutorial](https://wp-multilang.com/docs/knowledge-base/how-to-translate-url-slugs-with-selective-languages/)
+* Support Base Translation ( [available in premium version](https://wp-multilang.com/pricing/) ) - [View Tutorial](https://wp-multilang.com/docs/knowledge-base/how-to-translate-taxonomy-bases-such-as-categories-and-tags-into-selective-languages-using-the-base-translation-option/)
+* Export and import content in XLIFF or xml format to translate outside
+* Activate Multilingual Support for Post Types
+* Support Auto URL Slug Translation ( [available in premium version](https://wp-multilang.com/pricing/) ) - [View Tutorial](https://wp-multilang.com/docs/knowledge-base/how-to-translate-url-slugs-with-selective-languages/)
+
+== Features of the plugin WP Multilang ==
+
+* 100% free.
+* Translation at PHP.
+* Compatible with REST.
+* Support configuration for translate multidimensional arrays in options, meta fields, post content.
+* Support multisite.
+* Support WordPress in sub-folder.
+* Separate menu items, posts, terms, widgets, comments per language.
+* Many filters for dynamic applying translation settings.
+* No duplicate posts, terms, menus, widgets.
+* No sub-domain for each language version.
+* No additional tables in database.
+* Possibility set many languages with one localization. For example, for localization in the region.
+* Possibility to set custom locale for html(If installed locale is en_US, you can set locale like: en, en-UK, en-AU etc. Without installation another localization)
+* Possibility for add new languages for any user with capability `manage_options`.
+* Exist the role "Translator" for editing posts, terms. It can not publish or delete.
+* No limits by languages or by possibilities.
+
+== WP Multilang compatible with plugins ==
+
+* Elementor ( [available in premium version](https://wp-multilang.com/pricing/) ) - [View Tutorial](https://wp-multilang.com/docs/knowledge-base/how-to-build-a-multilingual-site-with-elementor-using-wp-multilang/)
+* Divi Builder ( [available in premium version](https://wp-multilang.com/pricing/) ) - [View Tutorial](https://wp-multilang.com/docs/knowledge-base/how-to-build-a-multilingual-site-with-divi-builder-using-wp-multilang/)
+* Bricks Builder ( [available in premium version](https://wp-multilang.com/pricing/) ) - [View Tutorial](https://wp-multilang.com/docs/knowledge-base/)
+* ACF, ACF Pro
+* WooCommerce
+* WooCommerce Customizer
+* Gutenberg
+* Yoast Seo
+* SEOPress 
+* Contact Form 7 (added mail tag [_language] for send user language in mail)
+* WPBakery Visual Composer
+* Page Builder by SiteOrigin
+* NextGEN Gallery
+* All in One SEO Pack
+* MailChimp for WordPress
+* Newsletter
+* Maps Builder
+* Max Mega Menu
+* MasterSlider
+* WP-PageNavi
+* BuddyPress
+* Meta Slider
+* TablePress
+* Download Monitor (Redefine templates for links in your theme and translate link texts)
+* Better Search
+* Rank Math SEO (thanks for @pratikmts)
+* WPGraphQL (Add lang to the query parameters in URL. Eg: lang=en)
+* Smart Custom Fields
+* Team – Team Members Showcase Plugin
+* Schema & Structured Data for WP & AMP
+* Forminator Forms
+* Gravity Forms
+* Ultimate Member Form
+* Oxygen Builder ( [available in premium version](https://wp-multilang.com/pricing/) )
+* Internal Link Juicer
+* Strong Testimonials
+* Fluent Forms
+* Gamipress
+* PublishPress Authors
+* Autolinks Manager
+
+== Advance Woocommerce Support ==
+* Send emails in customer's selected language
+* REST API Support
+* Import and export products in customer's selected language
+* Translate products (simple products, variable products, grouped products), categories, tags, global attributes
+* Cart synchronization across multiple languages 
+
+Manage translation settings via json.
+
+Add in the root of your theme or plugin file `wpm-config.json`.
+
+Sample configurations can be viewed in config files in folder 'configs' in root the plugin.
+
+Configuration is updated after switching theme, enable or update any plugins.
+
+The plugin has filters for dynamic application configuration for translate.
+
+For turn off translation, set `null` into the desired configuration.
+For example, you must turn off translation for a post type `post`.
+There are two ways:
+
+1. In json.
+    Create in root of a theme or a plugin file `wpm-config.json` with:
+    `{
+       "post_types": {
+         "post": null
+       }
+     }`
+
+2. Through the filter.
+    Add in functions.php
+    `add_filter( 'wpm_post_post_config', '__return_null' );`
+
+To enable translation pass an empty array in php `array()` or empty object in json `{}`.
+
+Supports translation multidimensional array of options, meta fields and post_content.
+Supports the removal of established localizations.
+Supports translation via GET parameter. Add in the GET parameter `lang` code desired language.
+Supports clean database of translations when removing the plugin. Translations are only removed from the built-in tables.
+Supports import term translations from qTranslate(by Soft79).
+Supports automatically redirect to the user's browser language, if he visits for the first time.
+
+Ideal for developers.
+
+For display language switcher in any place add the code to your template `if ( function_exists ( 'wpm_language_switcher' ) ) wpm_language_switcher ();`
+Function accepts two parameters:
+$type - 'list', 'dropdown', 'select'. Default - 'list'.
+$show - 'flag', 'name', 'both'. Default - 'both'.
+
+Or using the shortcode `wpm_lang_switcher`. It accept two not necessary parameters 'type' and 'show'.
+
+Available features for translation:
+`wpm_translate_url( $url, $language = '' );` - translate url
+`wpm_translate_string( $string, $language = '' );` - translate multilingual string
+`wpm_translate_value( $value, $language = '' );` - translate multidimensional array with multilingual strings
+
+Update translation occurs at PHP. Therefore plugin has high adaptability, compatibility and easily integrates with other plugins. This is what distinguishes it among similar.
+
+Available translation html tags by JS for strings what do not have WP filters before output.
+
+Add your tags in config:
+`
+"admin_html_tags": {
+    "admin_screen_id": {
+      "attribute": [
+        "selector"
+      ]
+    }
+}
+`
+
+Where:
+`admin_screen_id` - admin screen id.
+`attribute` - attribute what need to translate. Available 'text' - for translate text node, 'value' - for translate form values. Or other tag attribute, like 'title', 'alt'.
+`selector` - css selector for search needed tag. Each selector is a new array item.
+
+If You need to add translation for multidimentional array for repeated elements You can use custom tag 'wpm_each' for set config to each element in array.
+Example, add config for each item 'title' in custom post field array:
+`
+"post_fields": {
+    "custom_field": {
+      "wpm_each": {
+        "title": {}
+      }
+    }
+}
+`
+
+For set translation uses the syntax:
+`[:en]Donec vitae orci sed dolor[:de]Cras risus ipsum faucibus ut[:]`
+
+Added shortcode for translate text in any place:
+`[wpm_translate][:en]Donec vitae orci sed dolor[:de]Cras risus ipsum faucibus ut[:][wpm_translate]`
+
+If You translate text in established language, add lang parameter:
+`[wpm_translate lang="de"][:en]Donec vitae orci sed dolor[:de]Cras risus ipsum faucibus ut[:][wpm_translate]`
+
+Support translating from syntax qTranslate, qTranslate-X, WPGlobus etc.
+
+Compatible with REST-API.
+Support transfer the required translation through option `lang` in the GET request to REST.
+Has the ability to keep recording the target language through the transmission parameter `lang` in the request.
+
+== Migration from qTranslate-X ==
+
+1. Before installing/uninstalling, make database backup.
+2. Deactivate qTranslate-X.
+3. Install and activate WP Multilang.
+4. Create in root of your theme file ‘wpm-config.json’.
+5. Add all needed post types, taxonomies, options, fields to ‘wpm-config.json’. Setting from qTranslate-X not importing.
+6. Import term names from qTranslate.
+7. Check that everything is okay.
+8. If everything is okay, remove qTranslate-X. If not, make screenshots of errors, restore database from backup and add support issue with your screenshots and description of errors.
+
+== Warning ==
+
+Not compatible with:
+- WP Maintenance
+
+== Known issues ==
+
+Function 'get_page_by_title' not working, because in title field are stored titles for all languages. Use function 'wpm_get_page_by_title( $title )' as solution.
+
+NOTE: Because plugins have different ways of storing data, WP Multilang is not compatible with every single plugin out-of-the-box (mostly page builders). This may result in texts not being translatable or translations not being saved. Most of these issues can be resolved using the integration options (wpm-config.json or filters) of WP Multilang.
+
+Please try WP Multilang in a test-environment before activating it on an existing production site and always make a backup before activating!
+
+[Home](https://wp-multilang.com/) | [Help & Tech Support](https://wp-multilang.com/contact-us/) | [Documentation](https://wp-multilang.com/docs/) | [Premium](https://wp-multilang.com/)
+
+== Support ==
+
+We try our best to provide support on WordPress.org forums. However, We have a special [community support](https://wp-multilang.com/contact-us/) where you can ask us questions and get help about your WP Multilang related questions. Delivering a good user experience means a lot to us and so we try our best to reply each and every question that gets asked.
+
+== Bug Reports ==
+
+Bug reports for WP Multilang are [welcomed on GitHub](https://github.com/ahmedkaludi/wp-multilang/issues). Please note GitHub is not a support forum, and issues that aren't properly qualified as bugs will be closed.
+
+== Installation ==
+
+1. Upload the plugin files to the `/wp-content/plugins/wp-multilang` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. Adjust languages on WP Multilang Settings page.
+
+== Upgrade Notice ==
+
+Before installing or uninstalling make the site database backup before.
+
+== Frequently Asked Questions ==
+
+= I add new translation, but it rewrite another translation on different language. =
+
+If you have opened several browser tabs for editing this post in different languages, translation will be saved for the language that you opened last.
+
+== Screenshots ==
+
+1. Settings page
+2. Post list page
+3. Taxonomy list page
+4. Taxonomy edit page
+5. Post edit page
+
+== Changelog ==
+
+= 2.4.35 =
+- Feature: Added compability with complianz-gdpr plugin #179
+- Feature: Added compatibility with Affiliate Reviews plugin #202
+- Fixed: Language switcher issue #286
+- Fixed: ACF flexible content / repeater: adding, moving or deleting a row loses or swaps other languages translations #290
+- Fixed: Vulnerability fix researched & reported by wellknown.info #291
+- Fixed: Stale translatable post meta served when persistent object cache is enabled #292
+
+= 2.4.34 =
+- Fixed: Links are broken when using the "List" language switcher type #280
+- Fixed: Language swithcer issue on site editor sidebar after recent wordpress update #282
+- Fixed: WP Multilang 2.4.33 HTML-escapes existing language content when saving another language #283
+- Feature: Added Gemini AI Integration #284
+- Feature: Added Deepseek AI Integration #285
+
+= 2.4.33 =
+- Feature: Added compatibility with a BasePress module plugin #213
+- Feature: Added compatibility with Frontend Post Submission Manager lite plugin #235
+- Fixed: Translations are overwritten by default language when editing multiple translations in Gutenberg #277
+- Tested: Tested with wordpress version 7.0 #278
+- Fixed: Language switcher design issue after updating to wordpress 7.1 #279
+
+= 2.4.32 =
+- Feature: Added Compatibility With Autolink Manager #232
+- Feature: Added Compatibility With PublishPress Authors #233
+- Feature: Added Compatibility With Gamipress #234
+- Enhancement: Ultimate Member compatibility improvement $237
+- Fixed: Vulnerability fix reported by wordfence #272
+- Feature: Product type compatibility with Qodeum theme #275
+
+= 2.4.31 =
+- Fixed: Backslashes lost upon saving different language in custom HTML editor #267
+- Fixed: Yoast global settings not saving values per language #271
+- Enhancement: Improve Post Content Rendering and HTML Entity Handling #272
+
+= 2.4.30 =
+- Feature: Need to add DeepL AI Integration #257
+- Fixed: Language switcher compatibility with wordpress 7.0 #264
+- Feature: Added compaitbility with YMC Filter plugin #266
+- Fixed: Duplicate content creating in post/page using Divi #268
+- Enhancement: Added support to Secure Custom Fields #269
+
+= 2.4.29 =
+- Fixed: With WooCommerce storefront theme customization #252
+- Fixed: issue with Gutslider #253
+- Feature: Need to add compatibility with custom post type #256
+- Feature: Added compatibility with fluent form #261
+
+= 2.4.28 =
+- Feature: Added a Compatibility With Strong Testimonials #238
+- Enhancement: Add Welsh Flag #250
+- Fixed: ACF Fields saving issue with key #254
+- Feature: Added compatibility with bricks builder #255
+- Tested: Tested with wordpress version 7.0 #259
+
+= 2.4.27 =
+- Fixed: other language content is not updating in Elementor #215
+- Enhancement: Issue with ACF blocks #218
+- Feature: Added compatibility with the Internal Link Juicer plugin #219
+- Feature: Added Xliff file support for Oxygen Builder #242
+- Enhancement: Fixed bbPress forum translation issue  #244
+- Fixed: Undefined index notice in update_description method #249
+
+= 2.4.26 =
+- Feature: Added OpenAI Integration for Automatic Neural Network Translation #207
+- Feature: Allow override to be configurable in Auto translate #223
+- Feature: Added compatibility with oxygen builder #227
+- Fixed: WooCommerce products marked for single language still appear in other language archives (AUTO-DRAFT/empty titles) #229
+- Feature: Added compatibility with TownPress theme custom post types #230
+
+= 2.4.25 =
+- Fixed: Other language content is not updating in Elementor #215
+- Fixed: Promotion Banner BFCM #221
+- Fixed: Yoast SEO meta tags not translating #225
+
+= 2.4.24 =
+- Added: Promotion Banner BFCM #221
+- Added: OpenAI Integration for Automatic Neural Network Translation #207
+- fixed: Wrong url was added in switcher #220
+- Tested: WordPress version upto 6.9.
+
+= 2.4.23 =
+- feature Compatibility Ultimate Member Forms #208
+- fixed Error while adding ACF pro repeater fields #209
+- fixed Critical error while translation #217
+
+= 2.4.22 =
+- enhancement Fixed woocommerce attribute translation issue for third language #175
+- fixed Auto Translate style issue on product taxanomies/terms #196
+- enhancement Added re-translate option for taxonomies #197
+- feature Added an option to exclude page/post from auto translation #200 (Pro)
+- fixed Featured image issue on block editor #203
+
+= 2.4.21 =
+- fixed Rankmath title translation improvement #177
+- fixed Flag translation issue on products #185
+- fixed Memory size limit improvement #189
+- feature XLIFF export compatibility with ACF fields on post/pages #190
+- feature Added Bulk Translation Option for Tag and Categories #191
+- fixed Retranslation issue with Elementor pages #192
+- fixed Code improvement for duplicate queries #194
+
+= 2.4.20 =
+- feature Compatibility with SEOpress #170
+- feature Auto url slug translation #171
+- fixed Divi builder content translation improvement #173
+- fixed Conflict with latest pro 1.12 version #178
+- feature Added option to retranslate #180
+- fixed Yoast default title issue #181
+- feature Added support for exporting and importing content in XLIFF or XML format for pages #182
+- fixed Code improvement for custom post taxonomy description #183
+
+All changelog available on [GitHub](https://github.com/ahmedkaludi/wp-multilang/releases).
